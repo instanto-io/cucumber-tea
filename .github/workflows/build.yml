@@ -1,0 +1,62 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  chromium:
+    name: Chromium
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Verify the complete reactor in Chromium
+        run: ./mvnw --batch-mode --no-transfer-progress --errors --fail-at-end clean test
+
+  # Enable this job by setting the CUCUMBER_TEA_MINIFLARE_CI repository variable to
+  # true after sarto-edge-cf-junit has been published to GitHub Packages and a
+  # PACKAGES_TOKEN repository secret can read it.
+  miniflare:
+    name: Miniflare
+    if: ${{ vars.CUCUMBER_TEA_MINIFLARE_CI == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Verify the complete reactor in workerd
+        run: ./mvnw --settings .github/maven-settings.xml --batch-mode --no-transfer-progress --errors --fail-at-end --no-snapshot-updates -Pminiflare clean test
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+
+  publish-snapshot:
+    if: github.event_name != 'pull_request'
+    needs: chromium
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Publish Maven snapshot
+        run: ./mvnw --settings .github/maven-settings.xml --batch-mode --no-transfer-progress --errors --fail-at-end -DskipTests deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

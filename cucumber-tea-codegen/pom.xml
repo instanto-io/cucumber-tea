@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.instanto</groupId>
+    <artifactId>cucumber-tea-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>cucumber-tea-codegen</artifactId>
+  <name>Cucumber Tea Codegen</name>
+  <description>Generates runner-specific JUnit tests from Gherkin Tea features and annotated Java steps.</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>io.instanto</groupId>
+      <artifactId>cucumber-tea</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.instanto</groupId>
+      <artifactId>gherkin-tea</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-expressions</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <proc>none</proc>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
