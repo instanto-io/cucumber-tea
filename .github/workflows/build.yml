@@ -13,23 +13,12 @@ permissions:
 jobs:
   chromium:
     name: Chromium
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: "21"
-          cache: maven
-      - name: Check out the shared development parent
-        uses: actions/checkout@v4
-        with:
-          repository: instanto-io/instanto-poms
-          path: .build/instanto-poms
-      - name: Install the shared development parent
-        run: mvn -B -ntp -f .build/instanto-poms/pom.xml install
-      - name: Verify the complete reactor in Chromium
-        run: ./mvnw --batch-mode --no-transfer-progress --errors --fail-at-end clean test
+    uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
+    with:
+      name: Verify the complete reactor in Chromium
+      goals: clean test
+    secrets:
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
 
   # Enable this job by setting the CUCUMBER_TEA_MINIFLARE_CI repository variable to
   # true after sarto-edge-cf-junit has been published to GitHub Packages and a
@@ -37,47 +26,21 @@ jobs:
   miniflare:
     name: Miniflare
     if: ${{ vars.CUCUMBER_TEA_MINIFLARE_CI == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: "21"
-          cache: maven
-      - name: Check out the shared development parent
-        uses: actions/checkout@v4
-        with:
-          repository: instanto-io/instanto-poms
-          path: .build/instanto-poms
-      - name: Install the shared development parent
-        run: mvn -B -ntp -f .build/instanto-poms/pom.xml install
-      - name: Verify the complete reactor in workerd
-        run: ./mvnw --settings .github/maven-settings.xml --batch-mode --no-transfer-progress --errors --fail-at-end --no-snapshot-updates -Pminiflare clean test
-        env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+    uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
+    with:
+      name: Verify the complete reactor in workerd
+      goals: clean test
+      maven-args: --no-snapshot-updates -Pminiflare
+    secrets:
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
 
   publish-snapshot:
     if: github.event_name != 'pull_request'
     needs: chromium
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: "21"
-          cache: maven
-      - name: Check out the shared development parent
-        uses: actions/checkout@v4
-        with:
-          repository: instanto-io/instanto-poms
-          path: .build/instanto-poms
-      - name: Install the shared development parent
-        run: mvn -B -ntp -f .build/instanto-poms/pom.xml install
-      - name: Publish Maven snapshot
-        run: ./mvnw --settings .github/maven-settings.xml --batch-mode --no-transfer-progress --errors --fail-at-end -DskipTests deploy
-        env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
+    with:
+      name: Publish Maven snapshot
+      goals: deploy
+      maven-args: -DskipTests
+    secrets:
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
