@@ -17,8 +17,7 @@ jobs:
     with:
       name: Verify the complete reactor in Chromium
       goals: clean test
-    secrets:
-      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+    secrets: inherit
 
   # Enable this job by setting the CUCUMBER_TEA_MINIFLARE_CI repository variable to
   # true after sarto-edge-cf-junit has been published to GitHub Packages and a
@@ -31,8 +30,7 @@ jobs:
       name: Verify the complete reactor in workerd
       goals: clean test
       maven-args: --no-snapshot-updates -Pminiflare
-    secrets:
-      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+    secrets: inherit
 
   publish-snapshot:
     if: github.event_name != 'pull_request'
@@ -42,5 +40,4 @@ jobs:
       name: Publish Maven snapshot
       goals: deploy
       maven-args: -DskipTests
-    secrets:
-      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+    secrets: inherit
