@@ -47,8 +47,8 @@ public final class CucumberTea {
   }
 
   /** Runs a scenario body between its before and after hooks. */
-  public static void scenario(
-      String feature, String scenario, Body before, Body body, Body after) throws Throwable {
+  public static void scenario(String feature, String scenario, Body before, Body body, Body after)
+      throws Throwable {
     Throwable failure = null;
     try {
       before.run();
@@ -84,19 +84,13 @@ public final class CucumberTea {
 
   /** Runs one step and adds its feature, scenario, and source location to any failure. */
   public static void step(
-      String feature,
-      String scenario,
-      String source,
-      String keyword,
-      String text,
-      Body body)
+      String feature, String scenario, String source, String keyword, String text, Body body)
       throws Throwable {
     try {
       body.run();
     } catch (Throwable failure) {
       throw new CucumberFailure(
-          feature + " / " + scenario + "\n" + source + "\n" + keyword + " " + text,
-          failure);
+          feature + " / " + scenario + "\n" + source + "\n" + keyword + " " + text, failure);
     }
   }
 
@@ -115,7 +109,12 @@ public final class CucumberTea {
       return caught;
     }
     if (failure != caught) {
-      failure.addSuppressed(caught);
+      try {
+        failure.addSuppressed(caught);
+      } catch (NullPointerException unsupportedSuppression) {
+        // TeaVM 0.15 can leave the suppression list null on a browser-created Throwable.
+        return new CucumberFailure("Scenario and cleanup both failed; cleanup: " + caught, failure);
+      }
     }
     return failure;
   }
