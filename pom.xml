@@ -26,11 +26,6 @@
       <name>GitHub Packages</name>
       <url>https://maven.pkg.github.com/instanto-io/cucumber-tea</url>
     </repository>
-    <snapshotRepository>
-      <id>github-cucumber-tea</id>
-      <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/instanto-io/cucumber-tea</url>
-    </snapshotRepository>
   </distributionManagement>
 
   <properties>
