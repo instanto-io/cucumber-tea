@@ -12,14 +12,8 @@ Cloudflare Worker. The Java steps provide the implementation-specific fixture.
 ## Start with a browser test
 
 You need JDK 21, Maven, and a Chromium browser available to TeaVM's test runner.
-The current version is `0.1.0-SNAPSHOT`; there is no release yet. CI publishes
-snapshots to the Instanto Maven registry at
-`https://packages.instanto.io/api/packages/instanto-io/maven`. To use them,
-configure that repository as `forgejo-instanto` with matching credentials in
-your Maven settings. For a local start, install this checkout with
-`./mvnw install`. If Maven cannot resolve
-`io.instanto:instanto-org-pom:0.1.0-SNAPSHOT`, first install a sibling
-`instanto-poms` checkout with `mvn -f ../instanto-poms/pom.xml install`.
+Until the first release, install this checkout locally with `./mvnw install`
+before using the example below.
 
 Create `src/test/resources/features/arithmetic.feature`:
 
@@ -228,7 +222,11 @@ runner configuration. The
 [organised example](cucumber-tea-examples-organisation/README.md) shows how
 portable and host-specific scenarios can share a feature tree.
 
-## Build and support
+## Build from source
+
+This pre-release checkout uses `0.1.0-SNAPSHOT`. If Maven cannot resolve its
+`io.instanto:instanto-org-pom:0.1.0-SNAPSHOT` parent, install a sibling
+`instanto-poms` checkout with `mvn -f ../instanto-poms/pom.xml install` first.
 
 Run the browser examples in this repository with `./mvnw clean test`. When the
 Sarto Edge runner and its local Worker environment are available, run
@@ -236,6 +234,8 @@ Sarto Edge runner and its local Worker environment are available, run
 [small examples](cucumber-tea-examples),
 [JVM contexts and a custom runner](cucumber-tea-examples-jvm), and
 [a larger test-library example](cucumber-tea-examples-organisation/README.md).
+
+## Credits and support
 
 Gherkin Tea and Cucumber Tea are licensed under
 [Apache 2.0](LICENSE). They build on [Gherkin and Cucumber
