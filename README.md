@@ -12,9 +12,13 @@ Cloudflare Worker. The Java steps provide the implementation-specific fixture.
 ## Start with a browser test
 
 You need JDK 21, Maven, and a Chromium browser available to TeaVM's test runner.
-The current version is `0.1.0-SNAPSHOT`; there is no release yet. Until snapshots
-are published, install this repository with `./mvnw install`. If Maven cannot
-resolve `io.instanto:instanto-org-pom:0.1.0-SNAPSHOT`, first install a sibling
+The current version is `0.1.0-SNAPSHOT`; there is no release yet. CI publishes
+snapshots to the Instanto Maven registry at
+`https://packages.instanto.io/api/packages/instanto-io/maven`. To use them,
+configure that repository as `forgejo-instanto` with matching credentials in
+your Maven settings. For a local start, install this checkout with
+`./mvnw install`. If Maven cannot resolve
+`io.instanto:instanto-org-pom:0.1.0-SNAPSHOT`, first install a sibling
 `instanto-poms` checkout with `mvn -f ../instanto-poms/pom.xml install`.
 
 Create `src/test/resources/features/arithmetic.feature`:
