@@ -16,7 +16,7 @@ jobs:
     uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
     with:
       name: Verify the complete reactor in Chromium
-      goals: clean test
+      goals: -U clean test
     secrets: inherit
 
   # Enable this job by setting the CUCUMBER_TEA_MINIFLARE_CI repository variable to
@@ -28,8 +28,8 @@ jobs:
     uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
     with:
       name: Verify the complete reactor in workerd
-      goals: clean test
-      maven-args: --no-snapshot-updates -Pminiflare
+      goals: -U clean test
+      maven-args: -U -Pminiflare
     secrets: inherit
 
   publish-snapshot:
@@ -38,6 +38,6 @@ jobs:
     uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
     with:
       name: Publish Maven snapshot
-      goals: deploy
+      goals: -U deploy
       maven-args: -DskipTests
     secrets: inherit
