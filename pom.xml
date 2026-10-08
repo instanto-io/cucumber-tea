@@ -6,7 +6,7 @@
 
   <parent>
     <groupId>io.instanto</groupId>
-    <artifactId>instanto-org-pom</artifactId>
+    <artifactId>instanto-teavm-pom</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <relativePath/>
   </parent>
@@ -33,13 +33,11 @@
     <maven.compiler.release>21</maven.compiler.release>
     <gherkin.version>42.0.1</gherkin.version>
     <cucumber-expressions.version>20.1.0</cucumber-expressions.version>
-    <teavm.version>0.15.0</teavm.version>
     <junit.version>4.13.2</junit.version>
     <sarto-edge.version>0.1.0-SNAPSHOT</sarto-edge.version>
   </properties>
 
   <modules>
-    <module>teavm-classlib-support</module>
     <module>gherkin-tea</module>
     <module>cucumber-tea</module>
     <module>cucumber-tea-codegen</module>

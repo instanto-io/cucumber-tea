@@ -123,6 +123,22 @@ The repository contains
 [JVM contexts and a custom runner](cucumber-tea-examples-jvm), and
 [a larger test-library example](cucumber-tea-examples-organisation/README.md).
 
+## TeaVM compatibility
+
+The build inherits TeaVM 0.16.0 from `instanto-teavm-pom`. Gherkin Tea's
+browser parser tests use `io.instanto:instanto-teavm-classlib`, maintained in
+[Instanto TeaVM](https://github.com/instanto-io/instanto-teavm).
+The shared plugin supplies `String.lines()`, directionality, and the
+code-point corrections previously supplied by this repository's copied classes.
+The parser and annotation processor still run on the JVM during generation;
+generated scenarios do not need the parser or this shim at runtime.
+
+The JVM examples, Chromium suites, and Miniflare profiles keep their existing
+runners. Run `./mvnw clean test` for the normal reactor, and
+`./mvnw -Pminiflare clean test` with the Sarto Edge/Miniflare prerequisites
+available for Worker scenarios. Publish the shared classlib and its parent POM
+before building this migration against the snapshot registry.
+
 ## Credits and support
 
 Gherkin Tea and Cucumber Tea are licensed under

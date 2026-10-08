@@ -16,8 +16,7 @@
   <dependencies>
     <dependency>
       <groupId>io.instanto</groupId>
-      <artifactId>teavm-classlib-support</artifactId>
-      <version>${project.version}</version>
+      <artifactId>instanto-teavm-classlib</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
