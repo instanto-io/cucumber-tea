@@ -34,12 +34,12 @@
     <gherkin.version>42.0.1</gherkin.version>
     <cucumber-expressions.version>20.1.0</cucumber-expressions.version>
     <teavm.version>0.15.0</teavm.version>
+    <instanto-teavm.version>0.1.0-SNAPSHOT</instanto-teavm.version>
     <junit.version>4.13.2</junit.version>
     <sarto-edge.version>0.1.0-SNAPSHOT</sarto-edge.version>
   </properties>
 
   <modules>
-    <module>teavm-classlib-support</module>
     <module>gherkin-tea</module>
     <module>cucumber-tea</module>
     <module>cucumber-tea-codegen</module>
