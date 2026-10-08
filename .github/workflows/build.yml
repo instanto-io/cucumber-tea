@@ -19,17 +19,16 @@ jobs:
       goals: clean test
     secrets: inherit
 
-  # Enable this job by setting the CUCUMBER_TEA_MINIFLARE_CI repository variable to
-  # true after sarto-edge-cf-junit has been published to GitHub Packages and a
-  # PACKAGES_TOKEN repository secret can read it.
+  # Runs the examples in workerd, in a Miniflare container, so it needs a runner with
+  # its own Docker daemon. Mini2025's ARM64 runner has none yet.
   miniflare:
     name: Miniflare
-    if: ${{ vars.CUCUMBER_TEA_MINIFLARE_CI == 'true' }}
     uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
     with:
       name: Verify the complete reactor in workerd
       goals: clean test
       maven-args: --no-snapshot-updates -Pminiflare
+      runner-labels: '["self-hosted", "instanto-container", "X64"]'
     secrets: inherit
 
   publish-snapshot:
