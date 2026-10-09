@@ -16,7 +16,7 @@ jobs:
     uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
     with:
       name: Verify the complete reactor in Chromium
-      goals: clean test
+      goals: -U clean test
     secrets: inherit
 
   # Runs the examples in workerd, in a Miniflare container in the runner's own Docker
@@ -26,8 +26,8 @@ jobs:
     uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
     with:
       name: Verify the complete reactor in workerd
-      goals: clean test
-      maven-args: --no-snapshot-updates -Pminiflare
+      goals: -U clean test
+      maven-args: -Pminiflare
     secrets: inherit
 
   publish-snapshot:
@@ -36,6 +36,6 @@ jobs:
     uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
     with:
       name: Publish Maven snapshot
-      goals: deploy
+      goals: -U deploy
       maven-args: -DskipTests
     secrets: inherit

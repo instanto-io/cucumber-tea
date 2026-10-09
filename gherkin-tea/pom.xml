@@ -19,7 +19,6 @@
     <dependency>
       <groupId>io.instanto</groupId>
       <artifactId>instanto-teavm-classlib</artifactId>
-      <version>${instanto-teavm.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

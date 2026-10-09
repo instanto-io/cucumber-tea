@@ -123,6 +123,15 @@ The repository contains
 [JVM contexts and a custom runner](cucumber-tea-examples-jvm), and
 [a larger test-library example](cucumber-tea-examples-organisation/README.md).
 
+## TeaVM compatibility
+
+The build inherits TeaVM 0.16.0 from `instanto-teavm-pom`. Gherkin Tea's
+browser parser tests use `io.instanto:instanto-teavm-classlib`, maintained in
+[Instanto TeaVM](https://github.com/instanto-io/instanto-teavm), which adds
+`String.lines()` and `Character.getDirectionality` to TeaVM and corrects its
+code-point counting. The parser and annotation processor run on the JVM during
+generation, so generated scenarios need neither at runtime.
+
 ## Credits and support
 
 Gherkin Tea and Cucumber Tea are licensed under
