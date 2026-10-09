@@ -19,8 +19,8 @@ jobs:
       goals: clean test
     secrets: inherit
 
-  # Runs the examples in workerd, in a Miniflare container, so it needs a runner with
-  # its own Docker daemon. Mini2025's ARM64 runner has none yet.
+  # Runs the examples in workerd, in a Miniflare container in the runner's own Docker
+  # daemon.
   miniflare:
     name: Miniflare
     uses: instanto-io/instanto-poms/.github/workflows/maven-build.yml@main
@@ -28,7 +28,6 @@ jobs:
       name: Verify the complete reactor in workerd
       goals: clean test
       maven-args: --no-snapshot-updates -Pminiflare
-      runner-labels: '["self-hosted", "instanto-container", "X64"]'
     secrets: inherit
 
   publish-snapshot:
