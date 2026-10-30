@@ -134,7 +134,7 @@ generation, so generated scenarios need neither at runtime.
 
 ## Quality
 
-SpotBugs runs on every build. High-priority findings fail the build, and all findings are published to [code scanning](https://github.com/instanto-io/cucumber-tea/security/code-scanning). SonarQube analysis runs on `main` against the organisation's private instance; maintainers see the gate, coverage and issue counts in the workflow summary. The Sonar quality gate is advisory, so a snapshot still publishes when only that gate fails.
+SpotBugs runs on every build. High-priority findings fail the build, and all findings are included in the workflow summary. SonarQube analysis runs on `main` against the organisation's private instance; maintainers see the gate, coverage and issue counts in the workflow summary. The Sonar quality gate is advisory, so a snapshot still publishes when only that gate fails.
 
 See [Actions](https://github.com/instanto-io/cucumber-tea/actions) for the latest verification and quality summary.
 
