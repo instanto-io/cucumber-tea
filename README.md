@@ -132,6 +132,12 @@ browser parser tests use `io.instanto:instanto-teavm-classlib`, maintained in
 code-point counting. The parser and annotation processor run on the JVM during
 generation, so generated scenarios need neither at runtime.
 
+## Quality
+
+SpotBugs runs on every build. High-priority findings fail the build, and all findings are published to [code scanning](https://github.com/instanto-io/cucumber-tea/security/code-scanning). SonarQube analysis runs on `main` against the organisation's private instance; maintainers see the gate, coverage and issue counts in the workflow summary. The Sonar quality gate is advisory, so a snapshot still publishes when only that gate fails.
+
+See [Actions](https://github.com/instanto-io/cucumber-tea/actions) for the latest verification and quality summary.
+
 ## Credits and support
 
 Gherkin Tea and Cucumber Tea are licensed under
