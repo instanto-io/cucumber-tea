@@ -146,6 +146,12 @@
             <phase>process-classes</phase>
             <goals><goal>spotbugs</goal></goals>
           </execution>
+          <execution>
+            <id>high-priority-analysis-gate</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal></goals>
+            <configuration><failThreshold>High</failThreshold></configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
