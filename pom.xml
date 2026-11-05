@@ -29,6 +29,7 @@
   </distributionManagement>
 
   <properties>
+    <instanto.repository>cucumber-tea</instanto.repository>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>21</maven.compiler.release>
     <gherkin.version>42.0.1</gherkin.version>
